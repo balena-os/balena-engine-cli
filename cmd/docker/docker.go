@@ -1,4 +1,4 @@
-package main
+package docker
 
 import (
 	"fmt"
@@ -24,7 +24,7 @@ import (
 	"github.com/spf13/pflag"
 )
 
-func main() {
+func Main() {
 	dockerCli, err := command.NewDockerCli()
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
