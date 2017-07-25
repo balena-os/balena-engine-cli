@@ -1,4 +1,4 @@
-package main
+package docker
 
 import (
 	"fmt"
@@ -281,7 +281,7 @@ func runDocker(dockerCli *command.DockerCli) error {
 	return cmd.Execute()
 }
 
-func main() {
+func Main() {
 	dockerCli, err := command.NewDockerCli()
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
