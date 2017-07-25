@@ -3,6 +3,6 @@
 
 //go:generate goversioninfo -64=true -o=../../cli/winresources/resource.syso -icon=winresources/docker.ico -manifest=winresources/docker.exe.manifest ../../cli/winresources/versioninfo.json
 
-package main
+package docker
 
 import _ "github.com/docker/cli/cli/winresources"
