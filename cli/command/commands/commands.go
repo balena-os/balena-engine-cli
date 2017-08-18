@@ -10,7 +10,6 @@ import (
 	"github.com/docker/cli/cli/command/image"
 	"github.com/docker/cli/cli/command/manifest"
 	"github.com/docker/cli/cli/command/network"
-	"github.com/docker/cli/cli/command/plugin"
 	"github.com/docker/cli/cli/command/registry"
 	"github.com/docker/cli/cli/command/system"
 	"github.com/docker/cli/cli/command/trust"
@@ -42,14 +41,12 @@ func AddCommands(cmd *cobra.Command, dockerCli command.Cli) {
 		image.NewImageCommand(dockerCli),
 		manifest.NewManifestCommand(dockerCli),
 		network.NewNetworkCommand(dockerCli),
-		plugin.NewPluginCommand(dockerCli),
 		system.NewSystemCommand(dockerCli),
 		trust.NewTrustCommand(dockerCli),
 		volume.NewVolumeCommand(dockerCli),
 
 		// orchestration (swarm) commands
 		// (not supported by balenaEngine)
-		node.NewNodeCommand(dockerCli),
 
 		// legacy commands may be hidden
 		hide(container.NewAttachCommand(dockerCli)),
