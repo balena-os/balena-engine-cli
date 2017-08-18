@@ -14,13 +14,8 @@ import (
 	"github.com/docker/cli/cli/command/image"
 	"github.com/docker/cli/cli/command/manifest"
 	"github.com/docker/cli/cli/command/network"
-	"github.com/docker/cli/cli/command/node"
 	"github.com/docker/cli/cli/command/plugin"
 	"github.com/docker/cli/cli/command/registry"
-	"github.com/docker/cli/cli/command/secret"
-	"github.com/docker/cli/cli/command/service"
-	"github.com/docker/cli/cli/command/stack"
-	"github.com/docker/cli/cli/command/swarm"
 	"github.com/docker/cli/cli/command/system"
 	"github.com/docker/cli/cli/command/trust"
 	"github.com/docker/cli/cli/command/volume"
@@ -30,12 +25,6 @@ import (
 // AddCommands adds all the commands from cli/command to the root command
 func AddCommands(cmd *cobra.Command, dockerCli command.Cli) {
 	cmd.AddCommand(
-		// checkpoint
-		checkpoint.NewCheckpointCommand(dockerCli),
-
-		// config
-		config.NewConfigCommand(dockerCli),
-
 		// container
 		container.NewContainerCommand(dockerCli),
 		container.NewRunCommand(dockerCli),
@@ -64,21 +53,9 @@ func AddCommands(cmd *cobra.Command, dockerCli command.Cli) {
 		registry.NewLogoutCommand(dockerCli),
 		registry.NewSearchCommand(dockerCli),
 
-		// secret
-		secret.NewSecretCommand(dockerCli),
-
-		// service
-		service.NewServiceCommand(dockerCli),
-
 		// system
 		system.NewSystemCommand(dockerCli),
 		system.NewVersionCommand(dockerCli),
-
-		// stack
-		stack.NewStackCommand(dockerCli),
-
-		// swarm
-		swarm.NewSwarmCommand(dockerCli),
 
 		// trust
 		trust.NewTrustCommand(dockerCli),
@@ -90,7 +67,6 @@ func AddCommands(cmd *cobra.Command, dockerCli command.Cli) {
 		context.NewContextCommand(dockerCli),
 
 		// legacy commands may be hidden
-		hide(stack.NewTopLevelDeployCommand(dockerCli)),
 		hide(system.NewEventsCommand(dockerCli)),
 		hide(system.NewInfoCommand(dockerCli)),
 		hide(system.NewInspectCommand(dockerCli)),
