@@ -67,6 +67,7 @@ type buildOptions struct {
 	imageIDFile    string
 	platform       string
 	untrusted      bool
+	volumes        opts.ListOpts
 }
 
 // dockerfileFromStdin returns true when the user specified that the Dockerfile
@@ -89,6 +90,7 @@ func newBuildOptions() buildOptions {
 		ulimits:    opts.NewUlimitOpt(&ulimits),
 		labels:     opts.NewListOpts(opts.ValidateLabel),
 		extraHosts: opts.NewListOpts(opts.ValidateExtraHost),
+		volumes:    opts.NewListOpts(nil),
 	}
 }
 
@@ -152,6 +154,7 @@ func NewBuildCommand(dockerCli command.Cli) *cobra.Command {
 	flags.BoolVar(&options.squash, "squash", false, "Squash newly built layers into a single new layer")
 	flags.SetAnnotation("squash", "experimental", nil)
 	flags.SetAnnotation("squash", "version", []string{"1.25"})
+	flags.VarP(&options.volumes, "volume", "v", "Bind mount a volume")
 
 	return cmd
 }
@@ -559,5 +562,6 @@ func imageBuildOptions(dockerCli command.Cli, options buildOptions) types.ImageB
 		ExtraHosts:     options.extraHosts.GetAll(),
 		Target:         options.target,
 		Platform:       options.platform,
+		Volumes:        options.volumes.GetAll(),
 	}
 }
