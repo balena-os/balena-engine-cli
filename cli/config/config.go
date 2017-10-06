@@ -18,8 +18,8 @@ import (
 const (
 	// ConfigFileName is the name of config file
 	ConfigFileName = "config.json"
-	configFileDir  = ".docker"
-	oldConfigfile  = ".dockercfg" // Deprecated: remove once we stop printing deprecation warning
+	configFileDir  = ".balena"
+	oldConfigfile  = ".balena" // Deprecated: remove once we stop printing deprecation warning
 	contextsDir    = "contexts"
 )
 
