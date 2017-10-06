@@ -17,7 +17,7 @@ const (
 	defaultTLSHTTPPort = "2376" // Default TLS encrypted HTTP Port
 	// defaultUnixSocket Path for the unix socket.
 	// Docker daemon by default always listens on the default unix socket
-	defaultUnixSocket = "/var/run/docker.sock"
+	defaultUnixSocket = "/var/run/balena.sock"
 	// defaultTCPHost constant defines the default host string used by docker on Windows
 	defaultTCPHost = "tcp://" + defaultHTTPHost + ":" + defaultHTTPPort
 	// DefaultTLSHost constant defines the default host string used by docker for TLS sockets

@@ -18,8 +18,8 @@ import (
 const (
 	// ConfigFileName is the name of config file
 	ConfigFileName = "config.json"
-	configFileDir  = ".docker"
-	oldConfigfile  = ".dockercfg"
+	configFileDir  = ".balena"
+	oldConfigfile  = ".balena"
 	contextsDir    = "contexts"
 )
 
