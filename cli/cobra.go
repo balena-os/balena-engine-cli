@@ -58,7 +58,7 @@ func setupCommonRootCommand(rootCmd *cobra.Command) (*cliflags.ClientOptions, *c
 	rootCmd.PersistentFlags().Lookup("help").Hidden = true
 
 	rootCmd.Annotations = map[string]string{
-		"additionalHelp":      "For more help on how to use Docker, head to https://docs.docker.com/go/guides/",
+		"additionalHelp":      "For more help on how to use balenaEngine, head to https://docs.balena.io/",
 		"docs.code-delimiter": `"`, // https://github.com/docker/cli-docs-tool/blob/77abede22166eaea4af7335096bdcedd043f5b19/annotation/annotation.go#L20-L22
 	}
 
@@ -75,7 +75,7 @@ func setupCommonRootCommand(rootCmd *cobra.Command) (*cliflags.ClientOptions, *c
 // SetupRootCommand sets default usage, help, and error handling for the
 // root command.
 func SetupRootCommand(rootCmd *cobra.Command) (opts *cliflags.ClientOptions, helpCmd *cobra.Command) {
-	rootCmd.SetVersionTemplate("Docker version {{.Version}}\n")
+	rootCmd.SetVersionTemplate("balenaEngine version {{.Version}}\n")
 	return setupCommonRootCommand(rootCmd)
 }
 

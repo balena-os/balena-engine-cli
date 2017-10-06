@@ -26,7 +26,7 @@ const (
 	// ConfigFileName is the name of the client configuration file inside the
 	// config-directory.
 	ConfigFileName = "config.json"
-	configFileDir  = ".docker"
+	configFileDir  = ".balena-engine"
 	contextsDir    = "contexts"
 )
 
