@@ -29,7 +29,7 @@ func newDockerCommand(dockerCli *command.DockerCli) *cli.TopLevelCommand {
 	)
 
 	cmd := &cobra.Command{
-		Use:              "docker [OPTIONS] COMMAND [ARG...]",
+		Use:              "balena-engine [OPTIONS] COMMAND [ARG...]",
 		Short:            "A self-sufficient runtime for containers",
 		SilenceUsage:     true,
 		SilenceErrors:    true,
@@ -38,7 +38,7 @@ func newDockerCommand(dockerCli *command.DockerCli) *cli.TopLevelCommand {
 			if len(args) == 0 {
 				return command.ShowHelp(dockerCli.Err())(cmd, args)
 			}
-			return fmt.Errorf("docker: '%s' is not a docker command.\nSee 'docker --help'", args[0])
+			return fmt.Errorf("balena-engine: '%s' is not a balenaEngine command.\nSee 'balena-engine --help'", args[0])
 		},
 		PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
 			return isSupported(cmd, dockerCli)
@@ -414,19 +414,19 @@ func areFlagsSupported(cmd *cobra.Command, details versionDetails) error {
 		// See commit b39739123b845f872549e91be184cc583f5b387c for details.
 
 		if _, ok := f.Annotations["version"]; ok && !isVersionSupported(f, details.CurrentVersion()) {
-			errs = append(errs, fmt.Sprintf(`"--%s" requires API version %s, but the Docker daemon API version is %s`, f.Name, getFlagAnnotation(f, "version"), details.CurrentVersion()))
+			errs = append(errs, fmt.Sprintf(`"--%s" requires API version %s, but the balenaEngine daemon API version is %s`, f.Name, getFlagAnnotation(f, "version"), details.CurrentVersion()))
 			return
 		}
 		if _, ok := f.Annotations["ostype"]; ok && !isOSTypeSupported(f, details.ServerInfo().OSType) {
 			errs = append(errs, fmt.Sprintf(
-				`"--%s" is only supported on a Docker daemon running on %s, but the Docker daemon is running on %s`,
+				`"--%s" is only supported on a balenaEngine daemon running on %s, but the balenaEngine daemon is running on %s`,
 				f.Name,
 				getFlagAnnotation(f, "ostype"), details.ServerInfo().OSType),
 			)
 			return
 		}
 		if _, ok := f.Annotations["experimental"]; ok && !details.ServerInfo().HasExperimental {
-			errs = append(errs, fmt.Sprintf(`"--%s" is only supported on a Docker daemon with experimental features enabled`, f.Name))
+			errs = append(errs, fmt.Sprintf(`"--%s" is only supported on a balenaEngine daemon with experimental features enabled`, f.Name))
 		}
 		// buildkit-specific flags are noop when buildkit is not enabled, so we do not add an error in that case
 	})

@@ -79,7 +79,7 @@ func setupCommonRootCommand(rootCmd *cobra.Command) (*cliflags.ClientOptions, *p
 // SetupRootCommand sets default usage, help, and error handling for the
 // root command.
 func SetupRootCommand(rootCmd *cobra.Command) (*cliflags.ClientOptions, *pflag.FlagSet, *cobra.Command) {
-	rootCmd.SetVersionTemplate("Docker version {{.Version}}\n")
+	rootCmd.SetVersionTemplate("balenaEngine version {{.Version}}\n")
 	return setupCommonRootCommand(rootCmd)
 }
 
