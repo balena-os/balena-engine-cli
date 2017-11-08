@@ -17,7 +17,7 @@ const (
 	// ConfigFileName is the name of config file
 	ConfigFileName = "config.json"
 	configFileDir  = ".balena"
-	oldConfigfile  = ".balena"
+	oldConfigfile  = ".balenacfg"
 )
 
 var (
