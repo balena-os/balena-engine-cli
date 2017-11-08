@@ -19,7 +19,7 @@ const (
 	// ConfigFileName is the name of config file
 	ConfigFileName = "config.json"
 	configFileDir  = ".balena"
-	oldConfigfile  = ".balena" // Deprecated: remove once we stop printing deprecation warning
+	oldConfigfile  = ".balenacfg" // Deprecated: remove once we stop printing deprecation warning
 	contextsDir    = "contexts"
 )
 
