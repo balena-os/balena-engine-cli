@@ -27,7 +27,7 @@ func newDockerCommand(dockerCli *command.DockerCli) *cobra.Command {
 	var flags *pflag.FlagSet
 
 	cmd := &cobra.Command{
-		Use:              "balena [OPTIONS] COMMAND [ARG...]",
+		Use:              "balena-engine [OPTIONS] COMMAND [ARG...]",
 		Short:            "A self-sufficient runtime for containers",
 		SilenceUsage:     true,
 		SilenceErrors:    true,
@@ -166,7 +166,7 @@ func noArgs(cmd *cobra.Command, args []string) error {
 		return nil
 	}
 	return fmt.Errorf(
-		"balena: '%s' is not a balena command.\nSee 'balena --help'", args[0])
+		"balena-engine: '%s' is not a balenaEngine command.\nSee 'balena-engine --help'", args[0])
 }
 
 func Main() {
@@ -314,7 +314,7 @@ func areFlagsSupported(cmd *cobra.Command, details versionDetails) error {
 	cmd.Flags().VisitAll(func(f *pflag.Flag) {
 		if f.Changed {
 			if !isVersionSupported(f, clientVersion) {
-				errs = append(errs, fmt.Sprintf("\"--%s\" requires API version %s, but the balena daemon API version is %s", f.Name, getFlagAnnotation(f, "version"), clientVersion))
+				errs = append(errs, fmt.Sprintf("\"--%s\" requires API version %s, but the balenaEngine daemon API version is %s", f.Name, getFlagAnnotation(f, "version"), clientVersion))
 				return
 			}
 			if !isOSTypeSupported(f, osType) {
