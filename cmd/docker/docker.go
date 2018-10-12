@@ -33,7 +33,7 @@ func newDockerCommand(dockerCli *command.DockerCli) *cli.TopLevelCommand {
 	)
 
 	cmd := &cobra.Command{
-		Use:              "balena [OPTIONS] COMMAND [ARG...]",
+		Use:              "balena-engine [OPTIONS] COMMAND [ARG...]",
 		Short:            "A self-sufficient runtime for containers",
 		SilenceUsage:     true,
 		SilenceErrors:    true,
@@ -42,7 +42,7 @@ func newDockerCommand(dockerCli *command.DockerCli) *cli.TopLevelCommand {
 			if len(args) == 0 {
 				return command.ShowHelp(dockerCli.Err())(cmd, args)
 			}
-			return fmt.Errorf("balena: '%s' is not a balena command.\nSee 'balena --help'", args[0])
+			return fmt.Errorf("balena-engine: '%s' is not a balenaEngine command.\nSee 'balena-engine --help'", args[0])
 
 		},
 		PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
