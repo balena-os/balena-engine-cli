@@ -327,24 +327,8 @@ func runBuild(dockerCli command.Cli, options buildOptions) error {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	var resolvedTags []*resolvedTag
 	if !options.untrusted {
-		translator := func(ctx context.Context, ref reference.NamedTagged) (reference.Canonical, error) {
-			return TrustedReference(ctx, dockerCli, ref, nil)
-		}
-		// if there is a tar wrapper, the dockerfile needs to be replaced inside it
-		if buildCtx != nil {
-			// Wrap the tar archive to replace the Dockerfile entry with the rewritten
-			// Dockerfile which uses trusted pulls.
-			buildCtx = replaceDockerfileForContentTrust(ctx, buildCtx, relDockerfile, translator, &resolvedTags)
-		} else if dockerfileCtx != nil {
-			// if there was not archive context still do the possible replacements in Dockerfile
-			newDockerfile, _, err := rewriteDockerfileFromForContentTrust(ctx, dockerfileCtx, translator)
-			if err != nil {
-				return err
-			}
-			dockerfileCtx = ioutil.NopCloser(bytes.NewBuffer(newDockerfile))
-		}
+		return errors.New("notary isn't supported")
 	}
 
 	if options.compress {
@@ -444,13 +428,7 @@ func runBuild(dockerCli command.Cli, options buildOptions) error {
 		}
 	}
 	if !options.untrusted {
-		// Since the build was successful, now we must tag any of the resolved
-		// images from the above Dockerfile rewrite.
-		for _, resolved := range resolvedTags {
-			if err := TagTrusted(ctx, dockerCli, resolved.digestRef, resolved.tagRef); err != nil {
-				return err
-			}
-		}
+		return errors.New("notary isn't supported")
 	}
 
 	return nil

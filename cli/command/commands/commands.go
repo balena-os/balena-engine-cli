@@ -11,7 +11,6 @@ import (
 	"github.com/docker/cli/cli/command/network"
 	"github.com/docker/cli/cli/command/registry"
 	"github.com/docker/cli/cli/command/system"
-	"github.com/docker/cli/cli/command/trust"
 	"github.com/docker/cli/cli/command/volume"
 	"github.com/spf13/cobra"
 )
@@ -44,9 +43,6 @@ func AddCommands(cmd *cobra.Command, dockerCli command.Cli) {
 		// system
 		system.NewSystemCommand(dockerCli),
 		system.NewVersionCommand(dockerCli),
-
-		// trust
-		trust.NewTrustCommand(dockerCli),
 
 		// volume
 		volume.NewVolumeCommand(dockerCli),
