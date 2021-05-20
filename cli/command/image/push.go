@@ -88,7 +88,8 @@ func RunPush(dockerCli command.Cli, opts pushOptions) error {
 
 	defer responseBody.Close()
 	if !opts.untrusted {
-		return errors.New("notary isn't supported")
+		// TODO PushTrustedReference currently doesn't respect `--quiet`
+		return PushTrustedReference(dockerCli, repoInfo, ref, authConfig, responseBody)
 	}
 
 	if opts.quiet {

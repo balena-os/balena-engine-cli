@@ -71,7 +71,7 @@ func RunPull(cli command.Cli, opts PullOptions) error {
 	// Check if reference has a digest
 	_, isCanonical := distributionRef.(reference.Canonical)
 	if !opts.untrusted && !isCanonical {
-		err = errors.New("notary isn't supported")
+		err = trustedPull(ctx, cli, imgRefAndAuth, opts)
 	} else {
 		err = imagePullPrivileged(ctx, cli, imgRefAndAuth, opts)
 	}

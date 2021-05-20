@@ -10,6 +10,7 @@ import (
 	"github.com/containerd/containerd/platforms"
 	"github.com/docker/cli/cli"
 	"github.com/docker/cli/cli/command"
+	"github.com/docker/cli/cli/command/image"
 	"github.com/docker/cli/opts"
 	"github.com/docker/distribution/reference"
 	"github.com/docker/docker/api/types"
@@ -198,7 +199,8 @@ func createContainer(ctx context.Context, dockerCli command.Cli, containerConfig
 	warnOnLocalhostDNS(*hostConfig, stderr)
 
 	var (
-		namedRef reference.Named
+		trustedRef reference.Canonical
+		namedRef   reference.Named
 	)
 
 	containerIDFile, err := newCIDFile(hostConfig.ContainerIDFile)
@@ -214,14 +216,22 @@ func createContainer(ctx context.Context, dockerCli command.Cli, containerConfig
 	if named, ok := ref.(reference.Named); ok {
 		namedRef = reference.TagNameOnly(named)
 
-		if _, ok := namedRef.(reference.NamedTagged); ok && !opts.untrusted {
-			return nil, errors.New("notary isn't supported")
+		if taggedRef, ok := namedRef.(reference.NamedTagged); ok && !opts.untrusted {
+			var err error
+			trustedRef, err = image.TrustedReference(ctx, dockerCli, taggedRef, nil)
+			if err != nil {
+				return nil, err
+			}
+			config.Image = reference.FamiliarString(trustedRef)
 		}
 	}
 
 	pullAndTagImage := func() error {
 		if err := pullImage(ctx, dockerCli, config.Image, opts.platform, stderr); err != nil {
 			return err
+		}
+		if taggedRef, ok := namedRef.(reference.NamedTagged); ok && trustedRef != nil {
+			return image.TagTrusted(ctx, dockerCli, trustedRef, taggedRef)
 		}
 		return nil
 	}
