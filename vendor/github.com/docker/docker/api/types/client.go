@@ -204,6 +204,8 @@ type ImageBuildOptions struct {
 	// Outputs defines configurations for exporting build results. Only supported
 	// in BuildKit mode
 	Outputs []ImageBuildOutput
+
+	Volumes     []string
 }
 
 // ImageBuildOutput defines configuration for exporting a build result
@@ -234,6 +236,11 @@ type ImageBuildResponse struct {
 type ImageCreateOptions struct {
 	RegistryAuth string // RegistryAuth is the base64 encoded credentials for the registry.
 	Platform     string // Platform is the target platform of the image if it needs to be pulled from the registry.
+}
+
+// ImageDeltaOptions holds information to create image deltas
+type ImageDeltaOptions struct {
+	Tag string
 }
 
 // ImageImportSource holds source information for ImageImport

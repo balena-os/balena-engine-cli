@@ -76,7 +76,7 @@ require (
 )
 
 replace (
-	github.com/docker/docker => github.com/docker/docker v20.10.3-0.20220603173024-38633e797195+incompatible // master (v22.06-dev)
+	github.com/docker/docker => github.com/balena-os/balena-engine v20.10.19-0.20220922134505-3f4e6802de7f+incompatible // lmb-22.06.0-beta.0
 	github.com/gogo/googleapis => github.com/gogo/googleapis v1.3.2
 
 	// Resolve dependency hell with github.com/cloudflare/cfssl (transitive via

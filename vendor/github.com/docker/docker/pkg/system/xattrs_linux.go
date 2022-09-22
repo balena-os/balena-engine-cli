@@ -26,7 +26,6 @@ func Lgetxattr(path string, attr string) ([]byte, error) {
 	case errno != nil:
 		return nil, errno
 	}
-
 	return dest[:sz], nil
 }
 
