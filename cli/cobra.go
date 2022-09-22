@@ -64,7 +64,7 @@ func setupCommonRootCommand(rootCmd *cobra.Command) (*cliflags.ClientOptions, *p
 	// Configure registry.CertsDir() when running in rootless-mode
 	if os.Getenv("ROOTLESSKIT_STATE_DIR") != "" {
 		if configHome, err := homedir.GetConfigHome(); err == nil {
-			registry.SetCertsDir(filepath.Join(configHome, "docker/certs.d"))
+			registry.SetCertsDir(filepath.Join(configHome, "balena-engine/certs.d"))
 		}
 	}
 
