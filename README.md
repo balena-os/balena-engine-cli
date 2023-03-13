@@ -1,5 +1,7 @@
 [![build status](https://circleci.com/gh/docker/cli.svg?style=shield)](https://circleci.com/gh/docker/cli/tree/master)
 
+**⚠️⚠️⚠️We don't maintain the balena-related docs here!⚠️⚠️⚠️** Please refer to the [balena documentation website](https://docs.balena.io) instead.
+
 docker/cli
 ==========
 
